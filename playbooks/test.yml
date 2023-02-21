@@ -1,0 +1,18 @@
+---
+- name: Playbook Simple
+  hosts: aws
+  handlers:
+  - name: Handler 01
+    shell: echo Ha habido cambios!
+  tasks:
+  - name: Ping
+    ping: 
+  - name: Install vim
+    become: true
+    apt:
+      state: present
+      update_cache: yes
+      name:
+        - vim
+    notify: 
+      - "Handler 01"
